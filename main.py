@@ -9,43 +9,17 @@ from Product import Product
 from CheckoutRegister import CheckoutRegister
 
 # default data for the products or to say inventory.
-initial_products = [
-        {
-                'name': 'Bread',
-                'bar_code': 100,
-                'price': 1.00,
-                'quantity': 1,
-                'unit': 'loaf'
-        },
-        {
-                'name': 'Butter',
-                'bar_code': 101,
-                'price': 2.45,
-                'quantity': 350,
-                'unit': 'gm'
-        },
-        {
-                'name': 'Chicken',
-                'bar_code': 121,
-                'price': 5.01,
-                'quantity': 1,
-                'unit': 'kg'
-        },
-        {
-                'name': 'Apple',
-                'bar_code': 104,
-                'price': 2.45,
-                'quantity': 500,
-                'unit': 'gm'
-        },
-        {
-                'name': 'Banana',
-                'bar_code': 115,
-                'price': 2.45,
-                'quantity': 4,
-                'unit': 'pcs'
-        },
-    ]
+initial_product_name = ['Apple', 'Banana', 'Egg', 'Milk', 'Beer', 'Chicken', 
+                        'Bread', 'Shoes', 'Books', 'Shirt', 'Pants', 'Pen', 
+                        'Pencil' ]
+initial_product_code = [101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 
+                        111, 112, 113]
+initial_product_price = [2.50, 1.99, 2, 0.90, 20.00, 3.00, 1.50, 10.00, 22.00, 
+                         7.00, 10.00, 10.50, 5.00]
+initial_product_unit = ['kg', 'kg', 'cage', 'ltr', 'each', 'kg', 'gram', 
+                        'pairs', 'each', 'each', 'pairs', 'pack', 'pack']
+initial_product_quantity = [ 1, 1, 12, 1, 1, 1, 650, 1, 1, 1, 1, 12, 12]
+#
 # function to initialize inventory of products available.
 def initialize_data(initial_products):
     # initialize empty list for inventory products.
@@ -54,13 +28,15 @@ def initialize_data(initial_products):
     #easy to check whether barcode entered by user is available in inventory
     product_barcodes = []
     # loop through initial_data and add product to the list
-    for product in initial_products:
-        temp_product = Product(product['bar_code'], product['price'], product['name'], 
-                               product['quantity'], product['unit'])
-        # add product to the inventory product list.
+    for product in range(len(initial_product_name)):
+        print(product)
+        temp_product = Product(initial_product_code[product],
+                               initial_product_price[product],
+                               initial_product_name[product],
+                               initial_product_quantity[product],
+                               initial_product_unit[product])
         inventory_products.append(temp_product)
-        # add barcode of product to a list to make verification of barcode easier.
-        product_barcodes.append(product['bar_code'])
+        product_barcodes.append(initial_product_code[product])
     return inventory_products, product_barcodes
 
 # main function
@@ -116,23 +92,24 @@ def main():
             # customer to provide appropriate amount.
             except ValueError:
                 print('Please enter proper amount to pay.')
+        checkout_register.print_receipt()
         # initialize final output string
-        output_string = '----- Final Receipt -----'
+        #output_string = '----- Final Receipt -----'
         # append scanned product details to the output string.
-        for product in checkout_register.product_list:
-            output_string += '\n{}, {} {}'.format(product.name, 
-                                product.quantity, product.unit)
+        #for product in checkout_register.product_list:
+        #    output_string += '\n{}, {} {}'.format(product.name, 
+        #                        product.quantity, product.unit)
         # append total amount of the scanned products to the output string.
-        output_string += '\nTotal amount due: ${}'.format(checkout_register.total_amount)
+        #output_string += '\nTotal amount due: ${}'.format(checkout_register.total_amount)
         # append amount provided by customer as payment to the output string.
-        output_string += '\nAmount received: ${}'.format(checkout_register.paid_amount) 
+        #output_string += '\nAmount received: ${}'.format(checkout_register.paid_amount) 
         # append change amount to the output string
-        output_string += '\nChange given: ${}'.format(checkout_register.calculate_change())
-        output_string += '\n\n'
+        #output_string += '\nChange given: ${}'.format(checkout_register.calculate_change())
+        #output_string += '\n\n'
         # greet customer
-        output_string += 'Thank you for shopping at FedUni!'
+        #output_string += 'Thank you for shopping at FedUni!'
         # display whole output string
-        print(output_string)
+        #print(output_string)
         # ask if another customer wants to proceed with checkout.
         next_customer = input('(N)ext customer, or (Q)uit? ')
 
