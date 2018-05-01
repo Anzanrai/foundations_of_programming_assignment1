@@ -2,7 +2,7 @@
 """
 Created on Wed Apr 25 13:06:19 2018
 
-@author: anjan
+@author: deepen
 """
 
 class CheckoutRegister():
